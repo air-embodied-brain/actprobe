@@ -1,4 +1,4 @@
-# ActProbe: Action-Space Probing for Early Failure Detection of Generative Robot Policies
+# ActProbe: Action-Space Probe for Early Failure Detection of Generative Robot Policies
 
 [Paper (arXiv)](https://arxiv.org/abs/2606.08508) &middot; Preprint
 
@@ -143,7 +143,7 @@ Each benchmark directory contains:
 
 ```bibtex
 @misc{actprobe2026,
-  title  = {ActProbe: Action-Space Probing for Early Failure Detection of Generative Robot Policies},
+  title  = {ActProbe: Action-Space Probe for Early Failure Detection of Generative Robot Policies},
   author = {Huang, Bingjia and Li, Xiangyu and Wang, Xiang and Mi, Liang and Hao, Zixu and
             Wang, Weijun and Wu, Hao and Li, Kun and Liu, Yunxin and Cao, Ting},
   year   = {2026},
