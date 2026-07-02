@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: "ActProbe: <paper title TBD>"
+type: software
+authors:
+  - family-names: "<TBD>"
+    given-names: "<TBD>"
+date-released: "2026"
+url: "https://github.com/<TBD>/actprobe"
+preferred-citation:
+  type: conference-paper
+  title: "<paper title TBD>"
+  authors:
+    - family-names: "<TBD>"
+      given-names: "<TBD>"
+  year: 2026
+  conference:
+    name: NeurIPS

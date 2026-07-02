@@ -1,0 +1,37 @@
+# Per-benchmark artifacts: ship the small ActProbe training data + probe weights,
+# but drop the large baseline artifacts (hidden states, raw rollouts).
+**/data/**
+!**/data/metrics_logs/
+!**/data/metrics_logs/**
+!**/data/probe_data/
+!**/data/probe_data/**
+!**/data/task_embeddings.npy
+!**/data/task_instructions.json
+!**/data/qwen3_emb.pkl
+**/checkpoints/**
+**/ckpts/
+
+# Generated / dev artifacts
+**/__pycache__/
+**/*.pyc
+**/_inspect.txt
+**/*.log
+**/*.bak_*
+**/.DS_Store
+
+# Project website is kept outside this public repository.
+/docs/
+
+# Local results / IDE / env
+**/results/
+**/figures/
+.idea/
+.vscode/
+*.swp
+.env
+*.local
+
+# Anything explicitly excluded by user
+**/REBUTTAL_LOG.md
+**/PAPER_NUMBERS.md
+**/ablations/
