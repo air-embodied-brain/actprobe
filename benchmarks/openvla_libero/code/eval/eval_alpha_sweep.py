@@ -1,5 +1,5 @@
 """
-Alpha-sweep eval — paper Fig 4 / detection_curve_spec.md format.
+Alpha-sweep eval — paper fig3_fig7_fig8_fig9 / detection_curve_spec.md format.
 
 For each (method, split), runs all 3 seeds, sweeps alpha across 0.0..1.0,
 averages over seeds, writes one JSON matching:

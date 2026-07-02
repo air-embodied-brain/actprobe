@@ -1,5 +1,5 @@
 """
-Alpha sweep — paper Fig 4 / Fig 9 curve data.
+Alpha sweep — paper fig3_fig7_fig8_fig9 curve data.
 
 For each method × split × seed × alpha ∈ {0.05 ... 0.50}, compute:
   - τ from val succ q-scores (FunctionalCP)
