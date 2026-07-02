@@ -2,6 +2,10 @@
 
 [Paper (arXiv)](https://arxiv.org/abs/2606.08508) &middot; Preprint
 
+<p align="center">
+  <img src="assets/teaser.png" width="100%" alt="ActProbe raises an alarm before failures become visually recognizable.">
+</p>
+
 <p align="center"><em>ActProbe raises an alarm before failures become visually recognizable by probing action-space signals at runtime; the strongest hidden-state baseline only fires once the failure has already happened.</em></p>
 
 **ActProbe** is a lightweight, *pure action-space* detector that anticipates failures of generative
