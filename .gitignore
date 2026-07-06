@@ -19,9 +19,6 @@
 **/*.bak_*
 **/.DS_Store
 
-# Project website is kept outside this public repository.
-/docs/
-
 # Local results / IDE / env
 **/results/
 **/figures/

@@ -1,6 +1,6 @@
 # ActProbe: Action-Space Probe for Early Failure Detection of Generative Robot Policies
 
-[Paper (arXiv)](https://arxiv.org/abs/2606.08508) &middot; Preprint
+[Project Page](https://air-embodied-brain.github.io/actprobe/) &middot; [Paper (arXiv)](https://arxiv.org/abs/2606.08508) &middot; Preprint
 
 <p align="center">
   <img src="assets/teaser.png" width="100%" alt="ActProbe raises an alarm before failures become visually recognizable.">

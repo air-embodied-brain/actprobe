@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ActProbe: Action-Space Probe for Early Failure Detection of Generative Robot Policies</title>
+  <meta name="description" content="ActProbe is a lightweight, pure action-space probe that anticipates failures of generative robot policies before they become visually recognizable.">
+
+  <!-- Bulma + icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --ink:#1d2433; --muted:#5b6677; --line:#e7eaf0;
+      --accent:#15803d;            /* ActProbe green */
+      --accent-soft:#e8f3ec;
+      --accent-2:#c47d80;          /* muted red (baselines) */
+      --blue:#8bb5d6;
+      --bg:#ffffff; --bg-soft:#f7f9fb;
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;}
+    .serif{font-family:'Newsreader',Georgia,serif;}
+    .section{padding:3.2rem 1.5rem;}
+    .container{max-width:960px;}
+    .tight{max-width:820px;margin-inline:auto;}
+
+    /* hero */
+    .hero-head{background:linear-gradient(180deg,#f3f7f4 0%,#ffffff 100%);border-bottom:1px solid var(--line);}
+    .title-main{font-weight:800;letter-spacing:0;line-height:1.12;color:var(--ink);font-size:2.45rem;}
+    .title-main .brand{color:var(--accent);}
+    .title-main .title-line{display:block;}
+    .line{display:block;}
+    .subtitle-main{color:var(--muted);font-weight:500;margin-top:.6rem;font-size:1.05rem;}
+    .authors{margin-top:1.4rem;line-height:2;}
+    .authors a{color:var(--ink);font-weight:600;border-bottom:2px solid var(--accent-soft);}
+    .authors a:hover{border-color:var(--accent);}
+    .sup{color:var(--accent);font-weight:700;font-size:.8em;}
+    .affil{color:var(--muted);font-size:.92rem;margin-top:.6rem;line-height:1.7;}
+    .notes{color:var(--muted);font-size:.85rem;margin-top:.3rem;}
+
+    /* link buttons */
+    .links{margin-top:1.6rem;display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;}
+    .btn-pill{display:inline-flex;align-items:center;gap:.5rem;background:var(--ink);color:#fff;border-radius:999px;padding:.55rem 1.15rem;font-weight:600;font-size:.95rem;transition:transform .12s ease, background .12s ease;}
+    .btn-pill:hover{transform:translateY(-2px);background:#000;color:#fff;}
+    .btn-pill.alt{background:var(--accent);}
+    .btn-pill.alt:hover{background:#0f6c33;}
+    .btn-pill.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);}
+    .btn-pill.ghost:hover{background:var(--bg-soft);color:var(--ink);}
+    .btn-pill.disabled{background:var(--bg-soft);color:#9aa0a6;border:1px solid var(--line);pointer-events:none;cursor:default;}
+    .btn-pill.disabled:hover{transform:none;}
+
+    h2.sec{font-weight:800;font-size:1.7rem;letter-spacing:0;text-align:center;margin:0 auto 1.7rem;width:fit-content;max-width:820px;}
+    h2.sec::after{content:"";display:block;width:56px;height:3px;background:var(--accent);border-radius:3px;margin:.45rem auto 0;}
+
+    .lead{font-size:1.06rem;line-height:1.8;color:#37414f;}
+    .lead .hl{background:linear-gradient(transparent 60%, var(--accent-soft) 60%);font-weight:600;color:var(--ink);}
+
+    figure.fig{margin:0 auto;}
+    figure.fig.narrow{max-width:760px;}
+    .teaser-container{max-width:1160px;}
+    figure.fig.teaser{max-width:1080px;}
+    figure.fig img{border-radius:8px;border:1px solid var(--line);box-shadow:0 10px 30px rgba(20,30,50,.055);width:100%;background:#fff;box-sizing:border-box;}
+    figure.fig.plot img{padding:10px;}
+    figure.fig figcaption{color:var(--muted);font-size:.9rem;margin-top:.8rem;line-height:1.6;}
+    figcaption b{color:var(--ink);}
+    figure.fig video{width:100%;border-radius:8px;border:1px solid var(--line);box-shadow:0 10px 30px rgba(20,30,50,.055);background:#fff;}
+    .fig-videos{display:flex;flex-direction:column;gap:2rem;margin:1.8rem auto 0;max-width:820px;}
+    .fig-videos figure.fig{max-width:820px;}
+
+    /* stat cards */
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+    @media(max-width:768px){.stats{grid-template-columns:repeat(2,1fr);}}
+    .stat{background:#fff;border:1px solid var(--line);border-radius:8px;padding:1.2rem 1rem;text-align:center;}
+    .stat .num{font-weight:800;font-size:1.9rem;color:var(--accent);letter-spacing:0;}
+    .stat .lab{color:var(--muted);font-size:.85rem;margin-top:.3rem;line-height:1.4;}
+
+    /* signal chips */
+    .signals{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.4rem;}
+    @media(max-width:768px){.signals{grid-template-columns:1fr;}}
+    .signal{border:1px solid var(--line);border-radius:8px;padding:1.1rem 1.2rem;background:#fff;}
+    .signal .tag{display:inline-block;font-weight:700;color:var(--accent);font-size:.8rem;letter-spacing:0;text-transform:uppercase;}
+    .signal h4{font-weight:700;margin:.3rem 0 .4rem;font-size:1.08rem;}
+    .signal p{color:var(--muted);font-size:.95rem;line-height:1.6;}
+
+    .table-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(240px,.75fr);gap:1.2rem;align-items:start;margin-top:1.5rem;}
+    .table-block{background:transparent;border:0;border-radius:0;overflow:visible;box-shadow:none;}
+    .table-title{margin:1.25rem auto .6rem;max-width:880px;text-align:center;font-size:.94rem;line-height:1.45;color:#303947;}
+    .table-scroll{overflow-x:auto;padding-bottom:.25rem;}
+    table.paper-table{width:auto;min-width:0;margin:0 auto;border-collapse:collapse;font-size:1.06rem;white-space:nowrap;border-top:2px solid #1f2937;border-bottom:2px solid #1f2937;background:#fff;}
+    table.paper-table th,table.paper-table td{padding:.28rem .32rem;border-bottom:0;text-align:center;}
+    table.paper-table th:first-child,table.paper-table td:first-child{text-align:left;font-weight:700;color:var(--ink);}
+    table.paper-table thead th{background:transparent;color:var(--ink);font-weight:700;}
+    table.paper-table thead tr:last-child th,table.paper-table thead th[rowspan]{border-bottom:1.5px solid #1f2937;}
+    table.paper-table th[colspan]{text-align:center;}
+    table.paper-table .stack{display:inline-block;line-height:1.15;}
+    table.paper-table thead tr:first-child th:not(:first-child){border-left:1px solid #8d96a3;}
+    table.paper-table thead tr:last-child th:nth-child(1),
+    table.paper-table thead tr:last-child th:nth-child(3),
+    table.paper-table thead tr:last-child th:nth-child(5),
+    table.paper-table thead tr:last-child th:nth-child(7),
+    table.paper-table thead tr:last-child th:nth-child(9),
+    table.paper-table tbody td:nth-of-type(1),
+    table.paper-table tbody td:nth-of-type(3),
+    table.paper-table tbody td:nth-of-type(5),
+    table.paper-table tbody td:nth-of-type(7),
+    table.paper-table tbody td:nth-of-type(9){border-left:1px solid #8d96a3;}
+    table.paper-table .best{color:var(--ink);font-weight:800;}
+    table.paper-table .second{text-decoration:underline;text-underline-offset:3px;}
+    table.paper-table .dash{color:#98a1ad;}
+    table.paper-table .ours th,table.paper-table .ours td{background:#eef2f5;font-weight:800;}
+    table.paper-table .baseline th,table.paper-table .baseline td{border-top:1.5px solid #1f2937;}
+    .main-table{margin-top:1.4rem;}
+    .soft{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+
+    pre.bib{background:#f5f7fa;color:#1d2433;border:1px solid var(--line);border-radius:8px;padding:1.2rem 1.3rem;overflow:auto;font-size:.85rem;line-height:1.55;}
+    .sim-figs figure.fig img{max-height:320px;width:auto;margin:0 auto;display:block;}
+    footer{padding:2.5rem 1.5rem;color:var(--muted);font-size:.85rem;text-align:center;border-top:1px solid var(--line);}
+    footer a{color:var(--accent);}
+    .badge-eyebrow{display:inline-block;background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:.78rem;letter-spacing:0;text-transform:uppercase;padding:.3rem .8rem;border-radius:999px;}
+    @media(max-width:768px){
+      .section{padding:2.5rem 1rem;}
+      .title-main{font-size:2rem;}
+      .lead{font-size:1rem;}
+      .table-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= HERO ================= -->
+  <header class="hero-head">
+    <div class="section" style="padding-top:3.4rem;padding-bottom:2.4rem;">
+      <div class="container has-text-centered">
+        <span class="badge-eyebrow">Preprint &middot; Failure Detection for Robot Policies</span>
+        <h1 class="title-main serif" style="margin-top:1rem;">
+          <span class="title-line"><span class="brand">ActProbe</span>: Action-Space Probe for Early Failure Detection</span>
+          <span class="title-line">of Generative Robot Policies</span>
+        </h1>
+
+        <!-- authors -->
+        <div class="authors tight">
+          Bingjia Huang<span class="sup">1,2,*,&dagger;</span>,
+          Xiangyu Li<span class="sup">1,*</span>,
+          Xiang Wang<span class="sup">1</span>,
+          Liang Mi<span class="sup">3,&dagger;</span>,
+          Zixu Hao<span class="sup">1</span>,
+          Weijun Wang<span class="sup">1</span>,
+          Hao Wu<span class="sup">3</span>,
+          Kun Li<span class="sup">1</span>,
+          Yunxin Liu<span class="sup">1</span>,
+          Ting Cao<span class="sup">1,&Dagger;</span>
+        </div>
+        <div class="affil tight">
+          <span class="sup">1</span> Institute for AI Industry Research (AIR), Tsinghua University<br>
+          <span class="sup">2</span> University of Electronic Science and Technology of China &nbsp;&middot;&nbsp;
+          <span class="sup">3</span> Nanjing University
+        </div>
+        <div class="notes tight">
+          <span class="sup">*</span> Equal contribution &nbsp;
+          <span class="sup">&dagger;</span> Work done during internship at AIR, Tsinghua University &nbsp;
+          <span class="sup">&Dagger;</span> Corresponding author
+        </div>
+
+        <!-- links -->
+        <div class="links">
+          <a class="btn-pill" href="https://arxiv.org/abs/2606.08508" target="_blank" rel="noopener"><i class="ai ai-arxiv"></i>&nbsp;arXiv</a>
+          <a class="btn-pill ghost" href="https://github.com/air-embodied-brain/actprobe" target="_blank" rel="noopener"><i class="fab fa-github"></i> Code</a>
+          <a class="btn-pill ghost" href="#bibtex"><i class="fas fa-quote-right"></i> BibTeX</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= TEASER ================= -->
+  <section class="section" style="padding-top:2.4rem;">
+    <div class="container teaser-container">
+      <figure class="fig teaser">
+        <img src="static/images/teaser.png" alt="ActProbe teaser: alarm raised before visually recognizable failure">
+        <figcaption class="has-text-centered tight">
+          <span class="line"><b>ActProbe raises an alarm before the failure is visually recognizable</b></span>
+          <span class="line">by probing action-space signals at runtime.</span>
+          <span class="line">In contrast, the strongest hidden-state baseline (SAFE)</span>
+          <span class="line">only fires once the failure has already happened.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= STATS ================= -->
+  <section class="section soft">
+    <div class="container">
+      <div class="stats">
+        <div class="stat"><div class="num">+12.7%</div><div class="lab"><span class="line">average hypervolume gain</span><span class="line">on the accuracy&ndash;timeliness frontier</span></div></div>
+        <div class="stat"><div class="num">+9.0 pt</div><div class="lab"><span class="line">early-detection AUC lead</span><span class="line">on <b>unseen</b> tasks</span></div></div>
+        <div class="stat"><div class="num">2.9&times;</div><div class="lab"><span class="line">fewer environment interactions</span><span class="line">for RL fine-tuning</span></div></div>
+        <div class="stat"><div class="num">~24K</div><div class="lab"><span class="line">probe parameters</span><span class="line">2 action-space features</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABSTRACT ================= -->
+  <section class="section">
+    <div class="container tight">
+      <h2 class="sec">Abstract</h2>
+      <p class="lead">
+        Generative robot policies fail unpredictably at deployment: they hesitate at critical moments, drift off-task, or commit
+        to unrecoverable actions. Existing online failure detectors either require white-box access to policy internals or add
+        runtime overhead through resampling and observation-side signals. Our empirical analysis shows that
+        <span class="hl">the emitted action chunks themselves already carry strong predictive signal</span> for impending failures.
+        Motivated by this, we introduce <b>ActProbe</b>, a lightweight, pure action-space detector built on two compact signals
+        available from a single forward pass: <b>Temporal Consistency Error (TCE)</b> between consecutive action chunks and
+        <b>Action Chunk Magnitude (ACM)</b> of the current chunk. A task-conditioned LSTM&ndash;MLP maps these signals to per-step
+        failure probabilities. Across a diverse suite of generative robot policies and benchmarks, ActProbe
+        <span class="hl">typically raises alerts before failures become visually recognizable</span>, improving the
+        accuracy&ndash;timeliness Pareto frontier by a <b>12.7%</b> average hypervolume gain over both internal- and
+        external-feature baselines, including a <b>+9.0 point</b> early-detection AUC lead on unseen tasks. It further transfers to
+        deployment &mdash; predicting failures on unseen real-robot pick tasks and accelerating RL fine-tuning with
+        <b>2.9&times;</b> fewer environment interactions.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= METHOD ================= -->
+  <section class="section soft">
+    <div class="container">
+      <h2 class="sec">Two signals, read straight from the action stream</h2>
+      <p class="lead tight has-text-centered">
+        <span class="line">No resampling, no observation-side fusion,</span>
+        <span class="line">no access to internal policy states.</span>
+      </p>
+
+      <div class="signals tight">
+        <div class="signal">
+          <span class="tag">Signal 1</span>
+          <h4>Temporal Consistency Error (TCE)</h4>
+          <p>Compares the overlapping timesteps of two consecutive action chunks with mean squared error. TCE measures whether
+          the policy preserves its short-horizon plan across consecutive inferences.</p>
+        </div>
+        <div class="signal">
+          <span class="tag">Signal 2</span>
+          <h4>Action Chunk Magnitude (ACM)</h4>
+          <p>Treats the current action chunk as a flat vector and takes its L2 norm. ACM captures the command scale at the
+          current step, separating normal smooth progress from oversized corrections that often precede failure.</p>
+        </div>
+      </div>
+
+      <figure class="fig narrow plot" style="margin-top:2rem;">
+        <img src="static/images/feature_intuition.png" alt="ACM and TCE trajectories separate failure from success; coverage Venn diagram">
+        <figcaption class="has-text-centered">
+          <span class="line"><b>Left:</b> ACM and TCE trajectories diverge during a failure episode (red) vs. a success (blue).</span>
+          <span class="line"><b>Right:</b> ActProbe&rsquo;s detected-failure set largely subsumes those of hidden-state (SAFE-MLP)</span>
+          <span class="line">and observation-embedding (RND-OE) detectors, while catching failures they miss.</span>
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ================= DYNAMIC FIG (videos) ================= -->
+  <section class="section">
+    <div class="container">
+      <h2 class="sec">ActProbe alarms before visible failure</h2>
+      <p class="lead tight has-text-centered">
+        <span class="line">Dynamic rollouts show the per-step failure probability crossing the calibrated threshold</span>
+        <span class="line">before the visual failure is obvious.</span>
+      </p>
+      <div class="fig-videos">
+        <figure class="fig">
+          <video src="static/videos/fig1_montage_openvla.mp4" autoplay loop muted playsinline></video>
+          <figcaption class="has-text-centered tight">
+            <span class="line"><b>OpenVLA on LIBERO.</b> Left column: failures &mdash; ActProbe's per-step probability climbs above</span>
+            <span class="line">the calibrated threshold&nbsp;<span style="color:#c0392b;">&tau;</span>. Right column: successes &mdash; it stays below&nbsp;&tau;.</span>
+          </figcaption>
+        </figure>
+        <figure class="fig">
+          <video src="static/videos/fig1_montage_robocasa.mp4" autoplay loop muted playsinline></video>
+          <figcaption class="has-text-centered tight">
+            <span class="line"><b>GR00T on RoboCasa.</b> Same convention:</span>
+            <span class="line">failures (left) cross&nbsp;<span style="color:#c0392b;">&tau;</span>, successes (right) stay below.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RESULTS ================= -->
+  <section class="section">
+    <div class="container">
+      <h2 class="sec">Earlier and more accurate across benchmarks</h2>
+      <figure class="fig narrow plot">
+        <img src="static/images/results_detection.png" alt="F1 vs detection time across five benchmarks and two protocols">
+        <figcaption class="has-text-centered">
+          <span class="line"><b>F1 vs. average detection time</b> across five policy&ndash;environment settings</span>
+          <span class="line">(OpenVLA, &pi;<sub>0</sub>, &pi;<sub>0.5</sub>, GR00T on LIBERO and RoboCasa) under seen and unseen protocols.</span>
+          <span class="line">ActProbe (green) places curves toward the top-left,</span>
+          <span class="line">more accurate <i>and</i> earlier on most benchmarks.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= TABLE 1 ================= -->
+  <section class="section soft">
+    <div class="container">
+      <h2 class="sec">Early-detection AUC across five benchmarks</h2>
+      <p class="lead tight has-text-centered">
+        <span class="line">ROC-AUC over the first quarter of the rollout,</span>
+        <span class="line">averaged over three seeds.</span>
+      </p>
+      <div class="table-block main-table">
+        <div class="table-title">
+          <b>Table 1:</b> Early-detection AUC across five benchmarks, averaged over 3 seeds.
+          RoboCasa<sub>S</sub> and RoboCasa<sub>L</sub> denote single-stage and multi-stage task groups.
+          &ldquo;&mdash;&rdquo; indicates the method does not apply. Bold marks the best value per column; underlined values are second best.
+        </div>
+        <div class="table-scroll">
+          <table class="paper-table" aria-label="Early-detection AUC across five benchmarks">
+            <thead>
+              <tr>
+                <th scope="col" rowspan="2">Method</th>
+                <th scope="col" colspan="2"><span class="stack">&pi;<sub>0</sub><br>+LIBERO</span></th>
+                <th scope="col" colspan="2"><span class="stack">OpenVLA<br>+LIBERO</span></th>
+                <th scope="col" colspan="2"><span class="stack">GR00T<br>+RoboCasa</span></th>
+                <th scope="col" colspan="2"><span class="stack">&pi;<sub>0.5</sub><br>+RoboCasa<sub>S</sub></span></th>
+                <th scope="col"><span class="stack">&pi;<sub>0.5</sub><br>+RoboCasa<sub>L</sub></span></th>
+              </tr>
+              <tr>
+                <th scope="col">Seen</th>
+                <th scope="col">Unseen</th>
+                <th scope="col">Seen</th>
+                <th scope="col">Unseen</th>
+                <th scope="col">Seen</th>
+                <th scope="col">Unseen</th>
+                <th scope="col">Seen</th>
+                <th scope="col">Unseen</th>
+                <th scope="col">Seen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Cosine <i>k</i>-NN</th>
+                <td>68.9</td>
+                <td>57.2</td>
+                <td>72.1</td>
+                <td>42.0</td>
+                <td>65.5</td>
+                <td>70.3</td>
+                <td>56.3</td>
+                <td>44.4</td>
+                <td>71.1</td>
+              </tr>
+              <tr class="baseline">
+                <th scope="row">LogpZO</th>
+                <td>73.1</td>
+                <td>58.3</td>
+                <td>57.7</td>
+                <td>52.6</td>
+                <td>68.6</td>
+                <td>65.5</td>
+                <td>70.7</td>
+                <td>67.2</td>
+                <td>73.8</td>
+              </tr>
+              <tr>
+                <th scope="row">STAC-Single</th>
+                <td>65.3</td>
+                <td class="second">65.2</td>
+                <td class="dash">&mdash;</td>
+                <td class="dash">&mdash;</td>
+                <td>73.6</td>
+                <td class="second">73.8</td>
+                <td>62.3</td>
+                <td>66.0</td>
+                <td>77.7</td>
+              </tr>
+              <tr class="baseline">
+                <th scope="row">SAFE-LSTM</th>
+                <td>78.2</td>
+                <td>59.2</td>
+                <td>75.7</td>
+                <td>55.9</td>
+                <td>70.9</td>
+                <td>61.3</td>
+                <td class="best">74.9</td>
+                <td class="second">73.1</td>
+                <td class="second">80.9</td>
+              </tr>
+              <tr>
+                <th scope="row">SAFE-MLP</th>
+                <td>77.3</td>
+                <td>58.9</td>
+                <td class="best">80.9</td>
+                <td class="second">67.9</td>
+                <td class="second">74.2</td>
+                <td>61.5</td>
+                <td>73.7</td>
+                <td>71.0</td>
+                <td>74.7</td>
+              </tr>
+              <tr>
+                <th scope="row">SAFE-LSTM-TDQC</th>
+                <td class="second">79.6</td>
+                <td>62.8</td>
+                <td>67.5</td>
+                <td>57.6</td>
+                <td class="second">74.2</td>
+                <td>65.9</td>
+                <td>73.9</td>
+                <td>62.4</td>
+                <td>76.1</td>
+              </tr>
+              <tr>
+                <th scope="row">SAFE-MLP-TDQC</th>
+                <td>76.6</td>
+                <td>60.7</td>
+                <td>65.7</td>
+                <td>52.8</td>
+                <td>71.3</td>
+                <td>64.7</td>
+                <td class="second">74.8</td>
+                <td>70.4</td>
+                <td>73.7</td>
+              </tr>
+              <tr class="ours">
+                <th scope="row">ActProbe</th>
+                <td class="best">80.1</td>
+                <td class="best">71.4</td>
+                <td class="second">76.3</td>
+                <td class="best">73.8</td>
+                <td class="best">77.4</td>
+                <td class="best">76.3</td>
+                <td>70.0</td>
+                <td class="best">73.8</td>
+                <td class="best">82.7</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= APPLICATIONS ================= -->
+  <section class="section">
+    <div class="container">
+      <h2 class="sec">From simulation to real robots and faster RL</h2>
+      <div class="columns is-variable is-5 sim-figs">
+        <div class="column is-half">
+          <figure class="fig photo">
+            <img src="static/images/robot_setup.jpg" alt="Real-robot deployment on a Unitree G1-D humanoid">
+            <figcaption>
+              <span class="line"><b>Zero-shot to a real robot.</b> The RoboCasa-trained probe transfers to a Unitree G1-D humanoid,</span>
+              <span class="line">a different embodiment from the Franka-arm simulator,</span>
+              <span class="line">and attains the most correct trials on two unseen pick tasks.</span>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="column is-half">
+          <figure class="fig plot">
+            <img src="static/images/rl_acceleration.png" alt="RL fine-tuning acceleration with ActProbe early termination">
+            <figcaption>
+              <span class="line"><b>Faster RL fine-tuning.</b> Ending high-confidence failures early</span>
+              <span class="line">and reallocating the budget reaches baseline-level performance</span>
+              <span class="line">with <b>2.9&times;</b> fewer environment interactions (PPO on LIBERO-Object).</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BIBTEX ================= -->
+  <section class="section soft" id="bibtex">
+    <div class="container tight">
+      <h2 class="sec">BibTeX</h2>
+      <pre class="bib">@misc{actprobe2026,
+  title         = {ActProbe: Action-Space Probe for Early Failure Detection
+                   of Generative Robot Policies},
+  author        = {Huang, Bingjia and Li, Xiangyu and Wang, Xiang and Mi, Liang
+                   and Hao, Zixu and Wang, Weijun and Wu, Hao and Li, Kun
+                   and Liu, Yunxin and Cao, Ting},
+  year          = {2026},
+  eprint        = {2606.08508},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.RO}
+}</pre>
+    </div>
+  </section>
+
+  <footer>
+    <p>Project page for <b>ActProbe</b>: Action-Space Probe for Early Failure Detection of Generative Robot Policies.</p>
+    <p style="margin-top:.4rem;"><a href="https://github.com/air-embodied-brain/actprobe" target="_blank" rel="noopener">Code</a> &middot; <a href="https://arxiv.org/abs/2606.08508" target="_blank" rel="noopener">arXiv</a></p>
+  </footer>
+
+</body>
+</html>
