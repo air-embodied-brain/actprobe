@@ -27,6 +27,7 @@
 *.swp
 .env
 *.local
+.venv-table1/
 
 # Anything explicitly excluded by user
 **/REBUTTAL_LOG.md

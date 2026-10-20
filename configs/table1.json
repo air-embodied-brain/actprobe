@@ -1,0 +1,462 @@
+{
+  "schema_version": 1,
+  "metric": {
+    "name": "AUROC",
+    "mode": "taskmax",
+    "q": 0.25,
+    "positive_label": "failure",
+    "timestamp": "absolute step index / 100",
+    "std_ddof": 0
+  },
+  "benchmarks": {
+    "pi0_libero": {
+      "cohort_per_task": {
+        "task_0": 50,
+        "task_1": 50,
+        "task_2": 50,
+        "task_3": 50,
+        "task_4": 50,
+        "task_5": 50,
+        "task_6": 50,
+        "task_7": 50,
+        "task_8": 50,
+        "task_9": 50
+      },
+      "paper_targets": {
+        "allseen": 80.1,
+        "unseen": 71.4
+      },
+      "data_sha256": {
+        "benchmarks/pi0_libero/data/metrics_logs/task_0.jsonl": "86a00a0eba9842e3f0270c86991874b3cfdf052633ebb7b39e023d097a5068c1",
+        "benchmarks/pi0_libero/data/metrics_logs/task_1.jsonl": "4fb2e579539cc77ae42a782a970f6c50bc1afd920dddd80b3f045b04444c49f5",
+        "benchmarks/pi0_libero/data/metrics_logs/task_2.jsonl": "c822fbcead7dc46b25c82cdb334c8a0383bef26dedf8ddfbb14eaff37dcfba0c",
+        "benchmarks/pi0_libero/data/metrics_logs/task_3.jsonl": "6ab27f344feb0ea3a4b1bbecc734dac971a82c880d6702e0ba86e12e224e9d01",
+        "benchmarks/pi0_libero/data/metrics_logs/task_4.jsonl": "e97af8ff1807257153da7e922a6cacfb659516964582583f835de8efca1de5a3",
+        "benchmarks/pi0_libero/data/metrics_logs/task_5.jsonl": "580b040628fae71e61d6c7c2157e858126090462dd9d6c125153a254a3bc95a3",
+        "benchmarks/pi0_libero/data/metrics_logs/task_6.jsonl": "b4f34fc7e8167c67c82d73c693b9d0ce52d20237f7d8392ca3fe400f9cf1d512",
+        "benchmarks/pi0_libero/data/metrics_logs/task_7.jsonl": "db6740d19a7fde4840f197e0e20606fc3b85f47f30abbb713b87451ef399a1c0",
+        "benchmarks/pi0_libero/data/metrics_logs/task_8.jsonl": "a412753080b8fd6c0a98ce81094342f1b4be128fdc9802535029267d3169cfcb",
+        "benchmarks/pi0_libero/data/metrics_logs/task_9.jsonl": "cecc492cf0b07ad15a9e7c65aeab2043aae9b3c88bd41fc8e4e52865118109ef",
+        "benchmarks/pi0_libero/data/task_embeddings.npy": "cb604752e061a1c2b7e65ef8ef21eb983f1e24a7511b226ec97e87e1c9e21173"
+      },
+      "runs": [
+        {
+          "id": "run_1",
+          "split": "allseen",
+          "partition": "artifacts/table1/partitions/pi0_libero/allseen_run_1.json",
+          "partition_sha256": "236b2cd4e8d7cc2efe3c7e56ec30272fe65e19e377159bf3feb620959ce021b8",
+          "checkpoint": "artifacts/table1/pi0_libero/allseen_run_1.pt",
+          "checkpoint_sha256": "613445c435a9863b15e5e9b430dbafb41fe6d236eeca2832ed3c77b1447bbc64",
+          "reference_auc": 77.47695852534562
+        },
+        {
+          "id": "run_2",
+          "split": "allseen",
+          "partition": "artifacts/table1/partitions/pi0_libero/allseen_run_2.json",
+          "partition_sha256": "f1056a37fafd572acd26036c6a0e1d06814e887c4f48511146e2ef602abb12c8",
+          "checkpoint": "artifacts/table1/pi0_libero/allseen_run_2.pt",
+          "checkpoint_sha256": "4456ae5ddaf696c542a79ca855a37c8f5bd9389c97c211a91f9f674c52915967",
+          "reference_auc": 80.47235023041475
+        },
+        {
+          "id": "run_3",
+          "split": "allseen",
+          "partition": "artifacts/table1/partitions/pi0_libero/allseen_run_3.json",
+          "partition_sha256": "0d6a1b548220c683e74ae03202ebc92ee200daa6b2cc03c39b8174c45c755a97",
+          "checkpoint": "artifacts/table1/pi0_libero/allseen_run_3.pt",
+          "checkpoint_sha256": "6ce555e0e5a7d18e70c130fbe41838a55b72815fced99a6da6baaa2e92f63948",
+          "reference_auc": 79.78110599078342
+        },
+        {
+          "id": "run_1",
+          "split": "unseen",
+          "partition": "artifacts/table1/partitions/pi0_libero/unseen_run_1.json",
+          "partition_sha256": "9108e298388f0f59d666181e2896907d452978d77382a2f8bab5731801cb2653",
+          "checkpoint": "artifacts/table1/pi0_libero/unseen_run_1.pt",
+          "checkpoint_sha256": "4393dcd007c112e2c87b4ffbe9dce1bc5043c8b87850a79f4e4fcc495d1be8a2",
+          "reference_auc": 77.8409090909091
+        },
+        {
+          "id": "run_2",
+          "split": "unseen",
+          "partition": "artifacts/table1/partitions/pi0_libero/unseen_run_2.json",
+          "partition_sha256": "d06bd415a7a802df9ba7216f1e5ef91b7429f1063fdcad871bf7682e30d5ab95",
+          "checkpoint": "artifacts/table1/pi0_libero/unseen_run_2.pt",
+          "checkpoint_sha256": "c76e8f1d4ec1b3a655dc04d1ea96df37736aad371a72b1af6e394c1dbffee321",
+          "reference_auc": 58.31567796610169
+        },
+        {
+          "id": "run_3",
+          "split": "unseen",
+          "partition": "artifacts/table1/partitions/pi0_libero/unseen_run_3.json",
+          "partition_sha256": "f0d56c5ac7a08915c29296126d4b0f7d29601eb76e9bfb69edcb07c4467d26e3",
+          "checkpoint": "artifacts/table1/pi0_libero/unseen_run_3.pt",
+          "checkpoint_sha256": "b9cc3365791a6c8922517fb39da9e94473f67cc0b20d2b6d0ba8f3227b40f773",
+          "reference_auc": 78.0184659090909
+        }
+      ]
+    },
+    "openvla_libero": {
+      "cohort_per_task": {
+        "task_0": 50,
+        "task_1": 50,
+        "task_2": 50,
+        "task_3": 50,
+        "task_4": 50,
+        "task_5": 50,
+        "task_6": 50,
+        "task_7": 50,
+        "task_8": 50,
+        "task_9": 50
+      },
+      "paper_targets": {
+        "allseen": 76.3,
+        "unseen": 73.8
+      },
+      "data_sha256": {
+        "benchmarks/openvla_libero/data/metrics_logs/task_0.jsonl": "1d93eb63659ab03c183e8802d76065b3ffaee68c21f6df30ca8215063ce111fe",
+        "benchmarks/openvla_libero/data/metrics_logs/task_1.jsonl": "ebec7ef74798be067c97202a0518fde4bbd9ba4b75fc43412e9cd770ebee09e6",
+        "benchmarks/openvla_libero/data/metrics_logs/task_2.jsonl": "ed538f22af4a0328e861730d93ced8b94611dc94639b9a8327991a7af3493585",
+        "benchmarks/openvla_libero/data/metrics_logs/task_3.jsonl": "e1c18986dbf350a074e0d6e74a96da5d6a8d879e46e86163df9f243628bca459",
+        "benchmarks/openvla_libero/data/metrics_logs/task_4.jsonl": "49cf9051af17ed214f41ea464f9b52439a06fc63c219cb1dadd39e231e726a47",
+        "benchmarks/openvla_libero/data/metrics_logs/task_5.jsonl": "d4796d5f8339f25378d7dec61121ea8bb0897a646f64a02f7abce6100bf0e7d8",
+        "benchmarks/openvla_libero/data/metrics_logs/task_6.jsonl": "0afa65222fd2667d74d35c5aa15cb394046edef734fbcee3cda5e799b645728e",
+        "benchmarks/openvla_libero/data/metrics_logs/task_7.jsonl": "d7125614ed820ab52c760f63b28c19680930529d34277e4eb2e1be83be447bfe",
+        "benchmarks/openvla_libero/data/metrics_logs/task_8.jsonl": "2be671f00615cf7e306e3491473cea907eee7a69b65b8895b170560bffbdf071",
+        "benchmarks/openvla_libero/data/metrics_logs/task_9.jsonl": "bb805cbf0e63702be6bff9a871df4657fc555a59cb3b5fe606b03a4535e98742",
+        "benchmarks/openvla_libero/data/task_embeddings.npy": "a36385faa6e0eaae4728aca1613fd67876f94aae7967ead22aec9d4a83440768"
+      },
+      "runs": [
+        {
+          "id": "run_1",
+          "split": "allseen",
+          "partition": "artifacts/table1/partitions/openvla_libero/allseen_run_1.json",
+          "partition_sha256": "172b2575ef524dbd19d11752e164f833136d4f8d1abf5198a7d532b63efd08ad",
+          "checkpoint": "artifacts/table1/openvla_libero/allseen_run_1.pt",
+          "checkpoint_sha256": "1c6c3f79ec1309eed102367a44c8a15d1268d3bd17364ef62e92a18cbaa29a4d",
+          "reference_auc": 75.93808630393995
+        },
+        {
+          "id": "run_2",
+          "split": "allseen",
+          "partition": "artifacts/table1/partitions/openvla_libero/allseen_run_2.json",
+          "partition_sha256": "735d83351a1c85f0f46f7f00a4eec5a04a6db124eed0097e7087f3337d19d04a",
+          "checkpoint": "artifacts/table1/openvla_libero/allseen_run_2.pt",
+          "checkpoint_sha256": "beca690cc998074ed040fdb551edf0278f0e8d4a0c1ecbd19ace9a69b083e21c",
+          "reference_auc": 76.17260787992495
+        },
+        {
+          "id": "run_3",
+          "split": "allseen",
+          "partition": "artifacts/table1/partitions/openvla_libero/allseen_run_3.json",
+          "partition_sha256": "e8b99f73cd2a577846dd21fa18f301f024f70aaffe0e45e95171ba7191a4f3b7",
+          "checkpoint": "artifacts/table1/openvla_libero/allseen_run_3.pt",
+          "checkpoint_sha256": "8b921e7a7d1e0ff06f7b9e68e057e31b5028e640ebe4dab98efcdaaa0803b026",
+          "reference_auc": 76.87617260787992
+        },
+        {
+          "id": "run_1",
+          "split": "unseen",
+          "partition": "artifacts/table1/partitions/openvla_libero/unseen_run_1.json",
+          "partition_sha256": "6359872c3f9fe022a98825146474a7026bf36e7d29e5871bca5282d3dafdb86c",
+          "checkpoint": "artifacts/table1/openvla_libero/unseen_run_1.pt",
+          "checkpoint_sha256": "02083264ea77e9238758986e250ce98cfcc9d0b0d0002ad297192523bf152dfb",
+          "reference_auc": 75.74967405475881
+        },
+        {
+          "id": "run_2",
+          "split": "unseen",
+          "partition": "artifacts/table1/partitions/openvla_libero/unseen_run_2.json",
+          "partition_sha256": "9ad817ea3676993400a610780859f89d3b7ca170b15a45e117bcc48a6f593e96",
+          "checkpoint": "artifacts/table1/openvla_libero/unseen_run_2.pt",
+          "checkpoint_sha256": "8a40ec1a361bee0913b7bd1e1f8b8598901c34c9b03d53f7a23d558c61fe76a3",
+          "reference_auc": 74.25032594524122
+        },
+        {
+          "id": "run_3",
+          "split": "unseen",
+          "partition": "artifacts/table1/partitions/openvla_libero/unseen_run_3.json",
+          "partition_sha256": "536b93c241cf76c0077ed132d2d995420081e7b38197dfed6114d3bd51266783",
+          "checkpoint": "artifacts/table1/openvla_libero/unseen_run_3.pt",
+          "checkpoint_sha256": "db6cf91dc3a73e4102331712178bc13102b363c5419edd30875d23a2a92012d0",
+          "reference_auc": 71.4
+        }
+      ]
+    },
+    "groot_robocasa": {
+      "cohort_per_task": {
+        "CloseDoubleDoor": 200,
+        "CoffeePressButton": 200,
+        "CoffeeServeMug": 197,
+        "CoffeeSetupMug": 200,
+        "OpenDoubleDoor": 200,
+        "OpenDrawer": 200,
+        "OpenSingleDoor": 200,
+        "PnPCabToCounter": 200,
+        "PnPCounterToCab": 200,
+        "PnPCounterToMicrowave": 200,
+        "PnPCounterToSink": 200,
+        "PnPCounterToStove": 200,
+        "PnPMicrowaveToCounter": 200,
+        "PnPSinkToCounter": 200,
+        "PnPStoveToCounter": 200,
+        "TurnOffMicrowave": 193,
+        "TurnOffSinkFaucet": 199,
+        "TurnOffStove": 200,
+        "TurnOnMicrowave": 200,
+        "TurnOnSinkFaucet": 200,
+        "TurnOnStove": 201,
+        "TurnSinkSpout": 200
+      },
+      "paper_targets": {
+        "allseen": 77.4,
+        "unseen": 76.3
+      },
+      "data_sha256": {
+        "benchmarks/groot_robocasa/data/metrics_logs/CloseDoubleDoor_PandaOmron_Env.jsonl": "d716d1143dfaae2f9be6741381c537ad4213df5ffb9cbb1e7d83e05bc6f8804d",
+        "benchmarks/groot_robocasa/data/metrics_logs/CoffeePressButton_PandaOmron_Env.jsonl": "1621ef4bd001f2daa5deb9295cb9ebd1ef281566d8a0ca5c13ce3c8aa89d80ed",
+        "benchmarks/groot_robocasa/data/metrics_logs/CoffeeServeMug_PandaOmron_Env.jsonl": "b31801bd78869d9676a64edcf11cbd5801c573117cc3370efaaef4d1baacfd64",
+        "benchmarks/groot_robocasa/data/metrics_logs/CoffeeSetupMug_PandaOmron_Env.jsonl": "c19dd6bbf9fa02513a08f1cfe44ff5dd5c3a8a8140bd058ca411a903b6cf4b94",
+        "benchmarks/groot_robocasa/data/metrics_logs/OpenDoubleDoor_PandaOmron_Env.jsonl": "91fba569ec35c249ab3c50a3cfa1f0bdeb58ffcc21cbfd7728887c970029889d",
+        "benchmarks/groot_robocasa/data/metrics_logs/OpenDrawer_PandaOmron_Env.jsonl": "825c90e18c1de5e17b4bea953f60bf76510e47decd2ca06256d13208f9851912",
+        "benchmarks/groot_robocasa/data/metrics_logs/OpenSingleDoor_PandaOmron_Env.jsonl": "12f7283285c1139d26bc45555a5ad37c5b0f4bce987001e092d93e87cccdeb1e",
+        "benchmarks/groot_robocasa/data/metrics_logs/PnPCabToCounter_PandaOmron_Env.jsonl": "078a9d7759eac977f2604475f149a29659858eaa28bccd3413bdea864a06e782",
+        "benchmarks/groot_robocasa/data/metrics_logs/PnPCounterToCab_PandaOmron_Env.jsonl": "142beb667bfb327dd3295d1ce572c4221809b94b22a5467765929f98c89cbc5d",
+        "benchmarks/groot_robocasa/data/metrics_logs/PnPCounterToMicrowave_PandaOmron_Env.jsonl": "1810a7fa1e75eda36e468f46d55ba82d0a32bbf7af746fd131d24570475eb31c",
+        "benchmarks/groot_robocasa/data/metrics_logs/PnPCounterToSink_PandaOmron_Env.jsonl": "234db083a802b772683ff1a3529d8580522fafa1526f15c994ea622f8d72a26b",
+        "benchmarks/groot_robocasa/data/metrics_logs/PnPCounterToStove_PandaOmron_Env.jsonl": "d90f62b5aadb2ad2b582f45e9f13283c3497e50f0ba12f6437fc249b58df5ec6",
+        "benchmarks/groot_robocasa/data/metrics_logs/PnPMicrowaveToCounter_PandaOmron_Env.jsonl": "c37912a457e71943b6370a1742d2b9dc0ed59de9adf4aad4414bee774aba2c0d",
+        "benchmarks/groot_robocasa/data/metrics_logs/PnPSinkToCounter_PandaOmron_Env.jsonl": "4fc8da857572b4bfdd5efee378b202390adeb619bf411b59d283861e7d775044",
+        "benchmarks/groot_robocasa/data/metrics_logs/PnPStoveToCounter_PandaOmron_Env.jsonl": "d7137645c6672a039e9793ad49ab704e07c30833a43ba6448e0be1ecafcfb770",
+        "benchmarks/groot_robocasa/data/metrics_logs/TurnOffMicrowave_PandaOmron_Env.jsonl": "25231d1cb374c120b873716ced38cba768b47d5284c71e30c0a7717555ad1fac",
+        "benchmarks/groot_robocasa/data/metrics_logs/TurnOffSinkFaucet_PandaOmron_Env.jsonl": "b523f41491d1a1d04e6fe4536bb3ebd9202191d7a55da809372515d8091901a9",
+        "benchmarks/groot_robocasa/data/metrics_logs/TurnOffStove_PandaOmron_Env.jsonl": "db1cd2f43f73f6c8d7cfeceb60d4b9aa91cd5da478a469c603c480de6ed3e7fd",
+        "benchmarks/groot_robocasa/data/metrics_logs/TurnOnMicrowave_PandaOmron_Env.jsonl": "f6eadfb489d396239e69acfcfc8084a8ccadd1c1fff0cc67fb6489899a30da43",
+        "benchmarks/groot_robocasa/data/metrics_logs/TurnOnSinkFaucet_PandaOmron_Env.jsonl": "618608df630715e68e6903b6feada722114f92b0bd0affae4f8715ca5337e4bb",
+        "benchmarks/groot_robocasa/data/metrics_logs/TurnOnStove_PandaOmron_Env.jsonl": "97345afdd2b2a706854d6bad779f5020654b1bce3cfaca83649bf3ae6c970038",
+        "benchmarks/groot_robocasa/data/metrics_logs/TurnSinkSpout_PandaOmron_Env.jsonl": "1cf384952c42cd49128c653ed7290824fb385a3b23b019a45de3759717e7d196",
+        "benchmarks/groot_robocasa/data/task_embeddings.npy": "87a093725ee76b63c5662250f8245b8ffce466e9668873a357829296138270e1"
+      },
+      "runs": [
+        {
+          "id": "run_1",
+          "split": "allseen",
+          "partition": "artifacts/table1/partitions/groot_robocasa/allseen_run_1.json",
+          "partition_sha256": "2ff39261c6ee94cd34914d2e1e38633ebba1ab32e9053d2a63bf31d2a004200b",
+          "checkpoint": "artifacts/table1/groot_robocasa/allseen_run_1.pt",
+          "checkpoint_sha256": "9140b40b6f43f3b157eb68ac807d052f1fc9cee7ce6862bda7cccbe3250f0bb0",
+          "reference_auc": 78.37800208840933
+        },
+        {
+          "id": "run_2",
+          "split": "allseen",
+          "partition": "artifacts/table1/partitions/groot_robocasa/allseen_run_2.json",
+          "partition_sha256": "19b7e55037b5e1900a1689d6cd12ea697aa219fa918eb7ed4b5a7e944332582e",
+          "checkpoint": "artifacts/table1/groot_robocasa/allseen_run_2.pt",
+          "checkpoint_sha256": "3e947d61cd305780f2438bfe03aa3f6d230fc535b503c02f90bb6408af389adf",
+          "reference_auc": 72.11973546815176
+        },
+        {
+          "id": "run_3",
+          "split": "allseen",
+          "partition": "artifacts/table1/partitions/groot_robocasa/allseen_run_3.json",
+          "partition_sha256": "efc16e79ef2276206fd18ac04c6ecec77e7818331006bd5954187b842a4f9fc8",
+          "checkpoint": "artifacts/table1/groot_robocasa/allseen_run_3.pt",
+          "checkpoint_sha256": "eca438c5de097100587788edae7eb81da32b34d22abd8fb78fbc2e041edab834",
+          "reference_auc": 81.54542290288896
+        },
+        {
+          "id": "run_1",
+          "split": "unseen",
+          "partition": "artifacts/table1/partitions/groot_robocasa/unseen_run_1.json",
+          "partition_sha256": "311dfe703f7932434ccc44aea7be94b62dc85d048826f91fa6988927489d6542",
+          "checkpoint": "artifacts/table1/groot_robocasa/unseen_run_1.pt",
+          "checkpoint_sha256": "18f2cf6251918aabc25c4edea3fd0265ad8328cf53866a7d4bf67f7d7d79e16e",
+          "reference_auc": 74.38995788593512
+        },
+        {
+          "id": "run_2",
+          "split": "unseen",
+          "partition": "artifacts/table1/partitions/groot_robocasa/unseen_run_2.json",
+          "partition_sha256": "5c872269aab406dded2e0b42705a9927f81a52b266927b228c112e47cb59e8db",
+          "checkpoint": "artifacts/table1/groot_robocasa/unseen_run_2.pt",
+          "checkpoint_sha256": "a07202cf60189e06546117d066e162a593b896ac932fc255faa4ead251b12c14",
+          "reference_auc": 73.75011490026657
+        },
+        {
+          "id": "run_3",
+          "split": "unseen",
+          "partition": "artifacts/table1/partitions/groot_robocasa/unseen_run_3.json",
+          "partition_sha256": "2a2785db850ef4b452f72f6bb225863565faf3785bbed0abab2c170d9c9ad89c",
+          "checkpoint": "artifacts/table1/groot_robocasa/unseen_run_3.pt",
+          "checkpoint_sha256": "f49e60253f679cc91f54bc4508db20f8cfc7b2d39109690ac2010e1f7ec808a1",
+          "reference_auc": 80.70968130610278
+        }
+      ]
+    },
+    "pi05_robocasa": {
+      "cohort_per_task": {
+        "CloseDoubleDoor": 50,
+        "CloseDrawer": 48,
+        "CloseSingleDoor": 50,
+        "CoffeePressButton": 50,
+        "CoffeeServeMug": 50,
+        "CoffeeSetupMug": 50,
+        "OpenDoubleDoor": 50,
+        "OpenDrawer": 50,
+        "OpenSingleDoor": 50,
+        "PnPCabToCounter": 50,
+        "PnPCounterToCab": 50,
+        "PnPCounterToMicrowave": 50,
+        "PnPCounterToSink": 50,
+        "PnPCounterToStove": 50,
+        "PnPMicrowaveToCounter": 50,
+        "PnPSinkToCounter": 50,
+        "PnPStoveToCounter": 50,
+        "TurnOffMicrowave": 50,
+        "TurnOffSinkFaucet": 50,
+        "TurnOffStove": 50,
+        "TurnOnMicrowave": 50,
+        "TurnOnSinkFaucet": 50,
+        "TurnOnStove": 50,
+        "TurnSinkSpout": 49
+      },
+      "paper_targets": {
+        "allseen": 70.0,
+        "unseen": 73.8
+      },
+      "data_sha256": {
+        "benchmarks/pi05_robocasa/data/probe_data/CloseDoubleDoor.pkl": "8d4341091328708b224b05f6bb8b80e029c4d11b7e93681c669ffdeabb1518a8",
+        "benchmarks/pi05_robocasa/data/probe_data/CloseDrawer.pkl": "dd696f6e35e85f344f481329b7338b832667f0a9c9ded00e9ba9ed39d3262b32",
+        "benchmarks/pi05_robocasa/data/probe_data/CloseSingleDoor.pkl": "fc5dafcbefc2a15af77f9d04e2dbcfc70974613c2ea4190e6097dd6f8462dda4",
+        "benchmarks/pi05_robocasa/data/probe_data/CoffeePressButton.pkl": "ad343b548e63e9775f55aac6d49ed2f90076fab7de9f179973aadd46f25188f5",
+        "benchmarks/pi05_robocasa/data/probe_data/CoffeeServeMug.pkl": "6be2f5bddbbafd73c6143d0827f94f92dd5e811172b75d0948250b3ed734282f",
+        "benchmarks/pi05_robocasa/data/probe_data/CoffeeSetupMug.pkl": "24c8b870a02356e24a0cf59c7e1f87bc5001532ea86f576c219789191342e646",
+        "benchmarks/pi05_robocasa/data/probe_data/OpenDoubleDoor.pkl": "8bf4b07f4a62015ad97c1da3441b7c2909065a306fb04eb78da486c9cdcf7af0",
+        "benchmarks/pi05_robocasa/data/probe_data/OpenDrawer.pkl": "ad86c70dd7b6795297f4996ad7d93a249087a7f26b207ab8a52eb909bfe807b5",
+        "benchmarks/pi05_robocasa/data/probe_data/OpenSingleDoor.pkl": "25b80b3542cb348ab7ee1e66d575ddf65f199fba3c731652fdf3b72951e0e1e0",
+        "benchmarks/pi05_robocasa/data/probe_data/PnPCabToCounter.pkl": "8453ead1530817c40da45dba35ddc353ae3aa12fd1ea9b75d6d2f44aca81ee0a",
+        "benchmarks/pi05_robocasa/data/probe_data/PnPCounterToCab.pkl": "1790b7a7f3ce7c9c776ac96e00c4d1c6006f07fa84cd5673c39bd7bbdf730ace",
+        "benchmarks/pi05_robocasa/data/probe_data/PnPCounterToMicrowave.pkl": "2ec223ce47565adc3a1f24d9b755fdb39a2234c3e8a8e08e89e1529eafe0f51c",
+        "benchmarks/pi05_robocasa/data/probe_data/PnPCounterToSink.pkl": "8db140a6b1a34fafa766ef05586519631ae043734034f4182db6c5ea5047dc72",
+        "benchmarks/pi05_robocasa/data/probe_data/PnPCounterToStove.pkl": "90ddcb8ff52657d29359a754bc13608a20b8825926425f8dfea1cebdc1508575",
+        "benchmarks/pi05_robocasa/data/probe_data/PnPMicrowaveToCounter.pkl": "52cb883d1c14960f8c879c96417d50a0c387fa033a5ea1ef0bd2f35fbc9517b4",
+        "benchmarks/pi05_robocasa/data/probe_data/PnPSinkToCounter.pkl": "ca20de97a569a68b29dcfdc0c72d3568de0628429eef2e5ac6b017fdd226efa0",
+        "benchmarks/pi05_robocasa/data/probe_data/PnPStoveToCounter.pkl": "3996b99996e043e01f19db91670879e5041559fe27f5beb5cafcf69ea32ea31a",
+        "benchmarks/pi05_robocasa/data/probe_data/TurnOffMicrowave.pkl": "7cd629dbb82363513e23a797c3760e866e6cc76582601b67a60a38ab1b4a2786",
+        "benchmarks/pi05_robocasa/data/probe_data/TurnOffSinkFaucet.pkl": "493a6610c71b4fad85a72db055c224047d1d6e4bb784b34eec8b3bfce7ce4c14",
+        "benchmarks/pi05_robocasa/data/probe_data/TurnOffStove.pkl": "ccdb355f4e164419901ee0eb22accf8296b1042a4ea161dca2fab88c2b9ca1da",
+        "benchmarks/pi05_robocasa/data/probe_data/TurnOnMicrowave.pkl": "b65d429dbc49b40c89e21ea44d220fcaba6d97fd4ec481f754adbab3e4b6d4dc",
+        "benchmarks/pi05_robocasa/data/probe_data/TurnOnSinkFaucet.pkl": "71a5403995c1f864e1352a02ff32888ea9c525c0f0dfafd4a2f79e3fae601c47",
+        "benchmarks/pi05_robocasa/data/probe_data/TurnOnStove.pkl": "e790b80395fe01953c91a84775c953501f9c10ee332ba94e1ec8b94249de815d",
+        "benchmarks/pi05_robocasa/data/probe_data/TurnSinkSpout.pkl": "7a6878eb62a3b4f5132a0da3923f47896a683b8857906b4b2114f79d2beb52d0",
+        "benchmarks/pi05_robocasa/data/qwen3_emb.pkl": "cf6437e5100c9fcd73af4a449590bf3d1c04ec06991f1d9f48c2d559813269a8"
+      },
+      "runs": [
+        {
+          "id": "run_1",
+          "split": "allseen",
+          "partition": "artifacts/table1/partitions/pi05_robocasa/allseen_run_1.json",
+          "partition_sha256": "da6b6d0df69a42659166ada7548b30a4d02d990f6d4ba4dd454adf489e6d2e94",
+          "checkpoint": "artifacts/table1/pi05_robocasa/allseen_run_1.pt",
+          "checkpoint_sha256": "ab3eddd2f35d9786d02b3036789c091a61f86c8d5582f7cffe325f73c7c1c02f",
+          "reference_auc": 68.87902330743617
+        },
+        {
+          "id": "run_2",
+          "split": "allseen",
+          "partition": "artifacts/table1/partitions/pi05_robocasa/allseen_run_2.json",
+          "partition_sha256": "58f91156a9e7d17aa6fc95c8efced41a0a73b1c4b2c9da2ea5208440faeb3e9a",
+          "checkpoint": "artifacts/table1/pi05_robocasa/allseen_run_2.pt",
+          "checkpoint_sha256": "0641bcb229142cf42d5bd60190c278d0b16245ec943e670870581c21175ce8bd",
+          "reference_auc": 70.77691453940066
+        },
+        {
+          "id": "run_3",
+          "split": "allseen",
+          "partition": "artifacts/table1/partitions/pi05_robocasa/allseen_run_3.json",
+          "partition_sha256": "0c85e98a8bb26344f026d253b50ba3f2e82d7c72441a9e71a2e0dccfdf987f8e",
+          "checkpoint": "artifacts/table1/pi05_robocasa/allseen_run_3.pt",
+          "checkpoint_sha256": "f09d7f3564218d86909f380fa7961c6c8f1f4e492107943fee4d955ac8a1d2a0",
+          "reference_auc": 70.33296337402885
+        },
+        {
+          "id": "run_1",
+          "split": "unseen",
+          "partition": "artifacts/table1/partitions/pi05_robocasa/unseen_run_1.json",
+          "partition_sha256": "41e035abf7eb87f93745a99caad7357c36993d730c6da9df547d96a6fef3da83",
+          "checkpoint": "artifacts/table1/pi05_robocasa/unseen_run_1.pt",
+          "checkpoint_sha256": "3261cce744fc820cff7d8baa50066bc33f6828913883fb0e36a0799b90455981",
+          "reference_auc": 75.59055118110236
+        },
+        {
+          "id": "run_2",
+          "split": "unseen",
+          "partition": "artifacts/table1/partitions/pi05_robocasa/unseen_run_2.json",
+          "partition_sha256": "8c52bc46c8fd3a7993ac98d02d801f12e8d009d63ac4889fec5e3f770db32dac",
+          "checkpoint": "artifacts/table1/pi05_robocasa/unseen_run_2.pt",
+          "checkpoint_sha256": "9ab61c2084ebcd7397e124dd7a0684f1bb832774d6c78aadb141f48f87bd11ba",
+          "reference_auc": 76.79738562091502
+        },
+        {
+          "id": "run_3",
+          "split": "unseen",
+          "partition": "artifacts/table1/partitions/pi05_robocasa/unseen_run_3.json",
+          "partition_sha256": "687bd31f7a06f6efe12d8dfed922e17f0485a6a6e226d54a9e4e2421d225e1fd",
+          "checkpoint": "artifacts/table1/pi05_robocasa/unseen_run_3.pt",
+          "checkpoint_sha256": "0de94cac0860176659faf51725e89d1dd2d7565bbc505e2b0947e56371ca3f28",
+          "reference_auc": 68.88799999999999
+        }
+      ]
+    },
+    "pi05_robocasa_multistage": {
+      "cohort_per_task": {
+        "ArrangeVegetables": 50,
+        "MicrowaveThawing": 50,
+        "RestockPantry": 50,
+        "PrepareCoffee": 50,
+        "PreSoakPan": 50
+      },
+      "paper_targets": {
+        "allseen": 82.7
+      },
+      "data_sha256": {
+        "benchmarks/pi05_robocasa_multistage/data/probe_data/ArrangeVegetables.pkl": "354ee94ed898576e20ba23a3bd78abe846ff7ae4caaefcb1cd130d02d1818e88",
+        "benchmarks/pi05_robocasa_multistage/data/probe_data/MicrowaveThawing.pkl": "b4d118b363cd6a1a5dff928751bde8ab9c9fb4f3e7025a656f8ef276bbc43da4",
+        "benchmarks/pi05_robocasa_multistage/data/probe_data/PreSoakPan.pkl": "074ab3f0cb0094290559412774afdebeee6a6d760726da212a02d29d9936f39b",
+        "benchmarks/pi05_robocasa_multistage/data/probe_data/PrepareCoffee.pkl": "74605113ca43c63bdbe976a2966562e9e3bb60f2c2e328d69a9abf3ebee9dddd",
+        "benchmarks/pi05_robocasa_multistage/data/probe_data/RestockPantry.pkl": "3b9056ff553184d7add4a33d1cfa1770d0ec0a4b2612d07008c805e44dd850e0",
+        "benchmarks/pi05_robocasa_multistage/data/qwen3_emb.pkl": "ced9435938a3f8a7a4815b40ff6211e6cda5d5259e23c18527e033e079f9d388"
+      },
+      "runs": [
+        {
+          "id": "run_1",
+          "split": "allseen",
+          "partition": "artifacts/table1/partitions/pi05_robocasa_multistage/allseen_run_1.json",
+          "partition_sha256": "d7c0532a164aa6b5315c5cf799d3ff615d9afcdda812ca7e29e4a2bea4459c4d",
+          "checkpoint": "artifacts/table1/pi05_robocasa_multistage/allseen_run_1.pt",
+          "checkpoint_sha256": "c3beaf6e4afdb3d2e16f2f9f870d55d48478ee21a4b78c2f05cf888e3fa876cb",
+          "reference_auc": 84.28030303030303
+        },
+        {
+          "id": "run_2",
+          "split": "allseen",
+          "partition": "artifacts/table1/partitions/pi05_robocasa_multistage/allseen_run_2.json",
+          "partition_sha256": "1e94d468ad33764d824349fd779d49d38c9fc03a765339171df0455d9e4ad712",
+          "checkpoint": "artifacts/table1/pi05_robocasa_multistage/allseen_run_2.pt",
+          "checkpoint_sha256": "b5f13a3d536fb89c39a5ffdc16a0ab2c54afcae170aa9ae228cddab2c055fa1f",
+          "reference_auc": 82.38636363636364
+        },
+        {
+          "id": "run_3",
+          "split": "allseen",
+          "partition": "artifacts/table1/partitions/pi05_robocasa_multistage/allseen_run_3.json",
+          "partition_sha256": "8ea3f18c6aaf49e295666897c55e11adf7205501e23bd8f6a739aceb39f6e4c1",
+          "checkpoint": "artifacts/table1/pi05_robocasa_multistage/allseen_run_3.pt",
+          "checkpoint_sha256": "18282f2d35e03fa26d59b87de6976057df811cd565fe03ff8b1b50f16918dfcf",
+          "reference_auc": 82.1969696969697
+        }
+      ]
+    }
+  }
+}

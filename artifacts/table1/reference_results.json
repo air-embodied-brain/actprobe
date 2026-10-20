@@ -1,0 +1,122 @@
+{
+  "mode": "evaluate",
+  "training_epochs_limit": null,
+  "metric": {
+    "name": "AUROC",
+    "mode": "taskmax",
+    "q": 0.25,
+    "positive_label": "failure",
+    "timestamp": "absolute step index / 100",
+    "std_ddof": 0
+  },
+  "rows": [
+    {
+      "benchmark": "pi0_libero",
+      "split": "allseen",
+      "runs": [
+        "run_1",
+        "run_2",
+        "run_3"
+      ],
+      "mean": 79.24347158218126,
+      "std_population": 1.2805938556477017,
+      "paper_target": 80.1
+    },
+    {
+      "benchmark": "pi0_libero",
+      "split": "unseen",
+      "runs": [
+        "run_1",
+        "run_2",
+        "run_3"
+      ],
+      "mean": 71.3916843220339,
+      "std_population": 9.246416901380604,
+      "paper_target": 71.4
+    },
+    {
+      "benchmark": "openvla_libero",
+      "split": "allseen",
+      "runs": [
+        "run_1",
+        "run_2",
+        "run_3"
+      ],
+      "mean": 76.32895559724828,
+      "std_population": 0.39861003076866836,
+      "paper_target": 76.3
+    },
+    {
+      "benchmark": "openvla_libero",
+      "split": "unseen",
+      "runs": [
+        "run_1",
+        "run_2",
+        "run_3"
+      ],
+      "mean": 73.80000000000001,
+      "std_population": 1.804071541149541,
+      "paper_target": 73.8
+    },
+    {
+      "benchmark": "groot_robocasa",
+      "split": "allseen",
+      "runs": [
+        "run_1",
+        "run_2",
+        "run_3"
+      ],
+      "mean": 77.34772015315002,
+      "std_population": 3.9163764335528266,
+      "paper_target": 77.4
+    },
+    {
+      "benchmark": "groot_robocasa",
+      "split": "unseen",
+      "runs": [
+        "run_1",
+        "run_2",
+        "run_3"
+      ],
+      "mean": 76.28325136410149,
+      "std_population": 3.140839726905474,
+      "paper_target": 76.3
+    },
+    {
+      "benchmark": "pi05_robocasa",
+      "split": "allseen",
+      "runs": [
+        "run_1",
+        "run_2",
+        "run_3"
+      ],
+      "mean": 69.99630040695523,
+      "std_population": 0.8105571117616313,
+      "paper_target": 70.0
+    },
+    {
+      "benchmark": "pi05_robocasa",
+      "split": "unseen",
+      "runs": [
+        "run_1",
+        "run_2",
+        "run_3"
+      ],
+      "mean": 73.75864560067247,
+      "std_population": 3.4791286041950236,
+      "paper_target": 73.8
+    },
+    {
+      "benchmark": "pi05_robocasa_multistage",
+      "split": "allseen",
+      "runs": [
+        "run_1",
+        "run_2",
+        "run_3"
+      ],
+      "mean": 82.95454545454545,
+      "std_population": 0.9406353804135928,
+      "paper_target": 82.7
+    }
+  ]
+}

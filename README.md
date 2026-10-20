@@ -20,21 +20,63 @@ ActProbe across five policy–environment settings.
 
 ## Installation
 
+For the one-command checkpoint evaluation below, start with Python 3.10 or 3.11.
+The launcher creates an isolated CPU environment on its first run. No GPU, VLA
+installation, rollout collection, or embedding-model download is needed.
+
+Clone the repository:
+
 ```bash
 git clone https://github.com/air-embodied-brain/actprobe.git
 cd actprobe
-pip install -r requirements.txt   # torch>=2.7, numpy, scipy, scikit-learn, transformers (Qwen3-Embedding), ...
 ```
 
 Scripts are meant to be run from the repository root (or from a benchmark directory after sourcing its
 `env.sh`).
+For benchmark scripts outside the one-command workflow, install the general dependencies
+with `pip install -r requirements.txt`.
+
+## One-command Table 1 ActProbe evaluation
+
+```bash
+bash scripts/run_table1.sh
+```
+
+This evaluates the bundled ActProbe checkpoints for all **nine Table 1 settings**.
+The first run installs the CPU dependencies; subsequent runs reuse the environment.
+Input data and checkpoints are checked against their SHA-256 hashes before evaluation.
+Results are written to a new `results/table1_evaluate_<timestamp>/` directory:
+`summary.json`, `summary.csv`, per-run partitions, and per-trajectory predictions.
+
+Useful options:
+
+```bash
+# Evaluate just RoboCasaL.
+bash scripts/run_table1.sh --benchmarks pi05_robocasa_multistage
+
+# Use an existing compatible Python environment.
+ACTPROBE_PYTHON=/path/to/python bash scripts/run_table1.sh
+
+# Train new probes, then evaluate them, using the same configured partitions.
+bash scripts/run_table1.sh --mode train --benchmarks pi05_robocasa_multistage
+
+# Train and evaluate all nine settings (considerably slower than checkpoint evaluation).
+bash scripts/run_table1.sh --mode train
+```
+
+Training writes fresh checkpoints under its output directory and never overwrites the
+bundled weights. The baseline training recipe is implemented in `scripts/_table1_core.py`;
+complete historical training recipes are not available for every archived checkpoint.
+Consequently, fresh training and bundled-checkpoint evaluation are separate workflows.
+RoboCasaL fresh training is checked against the bundled reference in the tested environment.
+Floating-point behavior can vary with hardware and dependency versions.
 
 ## Data
 
 This release is self-contained for **ActProbe**. Each benchmark under `benchmarks/<name>/` ships the
 per-step action-space features used to train and evaluate the probe plus the task embeddings used for
-task conditioning. We do **not** ship trained probe weights — the probe is tiny (~24K params) and
-trains in about a minute per seed from this data (see *Train and evaluate* below).
+task conditioning. The 27 small ActProbe checkpoints used by the one-command evaluator
+are included under `artifacts/table1/`. The separate baseline detectors' weights are not included.
 
 | Benchmark | Shipped ActProbe data | Task-conditioning data |
 |---|---|---|
@@ -59,7 +101,7 @@ paths and the Python interpreter), then train and/or evaluate:
 cd benchmarks/groot_robocasa
 source env.sh
 
-# 1. Train the probe — no weights are shipped, so train first.
+# 1. Train fresh probes for this benchmark's legacy evaluation entry point.
 #    train_all.sh trains 3 probes on 3 random seeds (each seed = a fresh random
 #    train/val/test split); use N_SEEDS=5 for more. Checkpoints land in
 #    checkpoints/actprobe/.

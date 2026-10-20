@@ -1,0 +1,4 @@
+# CPU replay/training environment. Python 3.10 or 3.11.
+numpy==2.1.3
+scipy==1.15.3
+scikit-learn==1.7.2
