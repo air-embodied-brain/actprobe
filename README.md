@@ -31,10 +31,10 @@ git clone https://github.com/air-embodied-brain/actprobe.git
 cd actprobe
 ```
 
-Scripts are meant to be run from the repository root (or from a benchmark directory after sourcing its
-`env.sh`).
-For benchmark scripts outside the one-command workflow, install the general dependencies
-with `pip install -r requirements.txt`.
+Run all training and evaluation commands below from the repository root.
+The one-command launcher installs its own dependencies; no `source env.sh` step is needed.
+For other benchmark-specific scripts, install the general dependencies with
+`pip install -r requirements.txt` and follow their environment setup.
 
 ## One-command Table 1 ActProbe evaluation
 
@@ -68,8 +68,6 @@ Training writes fresh checkpoints under its output directory and never overwrite
 bundled weights. The baseline training recipe is implemented in `scripts/_table1_core.py`;
 complete historical training recipes are not available for every archived checkpoint.
 Consequently, fresh training and bundled-checkpoint evaluation are separate workflows.
-RoboCasaL fresh training is checked against the bundled reference in the tested environment.
-Floating-point behavior can vary with hardware and dependency versions.
 
 ## Data
 
@@ -89,33 +87,24 @@ are included under `artifacts/table1/`. The separate baseline detectors' weights
 For exact field schemas and feature ordering, use each benchmark's loader as the source of truth:
 `benchmarks/<name>/code/lib/data.py`.
 
-The baseline detectors (SAFE, LogpZO, …) additionally consume large hidden-state features, which are
-**not** included here; only the ActProbe results can be reproduced from the shipped data alone.
+Some baseline detectors require additional hidden-state data or pretrained weights that are
+not bundled with this release. The one-command workflow evaluates ActProbe only.
 
 ## Train and evaluate ActProbe
 
-Each benchmark under `benchmarks/<name>/` is self-contained. Source its `env.sh` (which auto-derives
-paths and the Python interpreter), then train and/or evaluate:
+Run from the repository root. For example, to train or evaluate GR00T:
 
 ```bash
-cd benchmarks/groot_robocasa
-source env.sh
+# Train and evaluate using the released fixed partitions.
+bash scripts/run_table1.sh --mode train --benchmarks groot_robocasa
 
-# 1. Train fresh probes for this benchmark's legacy evaluation entry point.
-#    train_all.sh trains 3 probes on 3 random seeds (each seed = a fresh random
-#    train/val/test split); use N_SEEDS=5 for more. Checkpoints land in
-#    checkpoints/actprobe/.
-bash scripts/train_all.sh
-#    (or call the trainer directly for a fixed set:
-#     python code/train/train_actprobe.py --splits allseen unseen --seeds 0 1 2)
-
-# 2. Evaluate (writes a metrics JSON). Seeds are auto-detected from whatever
-#    checkpoints you trained in step 1.
-python code/eval/eval_main_table.py --methods actprobe --out /tmp/groot_main_table.json
+# Evaluate the bundled checkpoints.
+bash scripts/run_table1.sh --benchmarks groot_robocasa
 ```
 
-Dropping `--methods actprobe` also scores the baseline detectors, which need the hidden-state features
-noted above; ActProbe itself runs from the shipped data alone.
+Training outputs, including new checkpoints, are saved under
+`results/table1_train_<timestamp>/`. Evaluation outputs are saved under
+`results/table1_evaluate_<timestamp>/`.
 
 ## Reproducing the feature data (optional)
 
@@ -142,8 +131,10 @@ per-step `env_records`/`policy_records` (and CSV logs) to disk — so we extract
 offline. The RoboCasa benchmarks have no such pre-dumped archive: the policies are rolled out directly
 and the (compact) features are logged online during the run.
 
-Either way, each episode is one JSON line:
+The released LIBERO and GR00T feature data use JSONL files, with one episode per line:
 `{episode_id, success, length, steps: [{t, chunk_mse, action_norm, ...}, ...]}`.
+The two π0.5 benchmarks instead use per-task PKL files containing episode records.
+See each benchmark's `code/lib/data.py` for its exact loading format.
 
 ## RL fine-tuning
 
